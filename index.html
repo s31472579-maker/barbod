@@ -2,207 +2,538 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اشتراک باربد | پرداخت آنلاین</title>
+    <title>
+        پنل اشتراک ویژه باربد | درخشش در مطالعه
+    </title>
     <style>
+        /* 
+           بخش تعاریف و متغیرهای بصری نئونی
+        */
         :root {
             --primary: #8b5cf6;
             --secondary: #ec4899;
-            --bg: #0a0c10;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --text: #f1f5f9;
+            --accent: #00f2ff;
+            --bg-deep: #05070a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-glow: 0 0 10px rgba(139, 92, 246, 0.5);
+            --font-family: 'Segoe UI', Tahoma, sans-serif;
         }
 
+        /* 
+           تنظیمات پایه بدنه با پس‌زمینه متحرک
+        */
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: var(--bg);
+            background-color: var(--bg-deep);
+            color: #ffffff;
+            font-family: var(--font-family);
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            line-height: 1.7;
+            overflow-x: hidden;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
         }
 
+        /* 
+           افکت درخشش هدر
+        */
         header {
-            padding: 50px 20px;
             text-align: center;
+            padding-top: 100px;
+            padding-bottom: 60px;
+            position: relative;
         }
 
         header h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            background: linear-gradient(to right, #a78bfa, #f472b6);
+            font-size: 5rem;
+            font-weight: 900;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #8b5cf6, #00f2ff, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 900;
+            filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3));
+            animation: titleGlow 3s infinite alternate;
         }
 
-        .online-pay-header {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 15px;
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3)); }
+            to { filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.6)); }
+        }
+
+        .gateway-box {
             display: inline-block;
-            margin-top: 20px;
+            background: var(--glass);
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--glass-border);
+            padding-top: 15px;
+            padding-bottom: 15px;
+            padding-left: 40px;
+            padding-right: 40px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
+        .gateway-box a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(0, 242, 255, 0.5);
+        }
+
+        /* 
+           باکس اصلی محتوا
+        */
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 30px;
+            padding-right: 30px;
         }
 
+        /* 
+           تیتر بخش‌ها با جلوه خط نئون
+        */
         .section-title {
-            font-size: 1.8rem;
-            margin: 40px 0 25px;
-            padding-right: 15px;
-            border-right: 4px solid var(--primary);
+            margin-top: 100px;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            position: relative;
+            padding-right: 30px;
         }
 
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* 
+           سیستم کارت‌های درخشان
+        */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
         }
 
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
+        .glow-card {
+            background: var(--glass);
+            border-top-left-radius: 35px;
+            border-top-right-radius: 35px;
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--glass-border);
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 30px;
+            padding-right: 30px;
+            transition-duration: 0.5s;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
             text-align: center;
-            transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.07);
-            border-color: var(--primary);
+        .glow-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            transition: 0.5s;
         }
 
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 15px 0;
-            color: #fff;
+        .glow-card:hover {
+            transform: translateY(-20px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 242, 255, 0.2);
         }
 
-        .price span {
-            font-size: 0.9rem;
+        .glow-card:hover::before {
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.15) 0%, transparent 70%);
+        }
+
+        .card-price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .card-price span {
+            font-size: 1rem;
             color: #94a3b8;
         }
 
-        .btn-buy {
-            display: inline-block;
+        /* 
+           دکمه خرید نئونی
+        */
+        .btn-glow {
+            display: block;
             width: 100%;
-            padding: 12px 0;
-            margin-top: 20px;
+            padding-top: 18px;
+            padding-bottom: 18px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
             font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+            transition: 0.4s;
+            border-width: 0px;
+            cursor: pointer;
         }
 
-        .btn-buy:hover {
-            opacity: 0.9;
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+        .btn-glow:hover {
+            box-shadow: 0 0 40px rgba(236, 72, 153, 0.6);
+            transform: scale(1.05);
+            filter: brightness(1.2);
         }
 
-        .features {
-            list-style: none;
-            padding: 0;
-            color: #94a3b8;
-            font-size: 0.9rem;
+        /* 
+           بخش راهنمای گام به گام
+        */
+        .guide-section {
+            margin-top: 120px;
+            background: rgba(255,255,255,0.02);
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 30px;
+            padding-right: 30px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
         }
 
+        .step-item {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-left: 20px;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* 
+           استایل فرم تماس با روبیکا
+        */
+        .contact-card {
+            margin-top: 100px;
+            background: linear-gradient(145deg, rgba(20,20,20,0.9), rgba(10,10,10,0.9));
+            padding-top: 60px;
+            padding-bottom: 60px;
+            padding-left: 40px;
+            padding-right: 40px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--primary);
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .form-input {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 25px;
+            padding-right: 25px;
+            background-color: rgba(255,255,255,0.05);
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--glass-border);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-family: var(--font-family);
+            box-sizing: border-box;
+            outline-style: none;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        }
+
+        /* 
+           فوتر درخشان نهایی
+        */
         footer {
+            margin-top: 150px;
+            padding-top: 80px;
+            padding-bottom: 80px;
+            background-color: #020305;
             text-align: center;
-            padding: 40px;
-            color: #475569;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: var(--glass-border);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(to left, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        /* 
+           رسپانسیو تبلت و موبایل
+        */
+        @media (max-width: 1100px) {
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 650px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>اشتراک باربد</h1>
-    <div class="online-pay-header">
-        💳 درگاه فعال خرید آنلاین: 
-        <a href="https://reymit.ir/sobhanstbs" style="color: #f472b6; text-decoration: none; font-weight: bold;">reymit.ir/sobhanstbs</a>
+    <div class="container">
+        <h1>اشتراک باربد</h1>
+        <p style="font-size: 1.5rem; color: #cbd5e1; margin-bottom: 40px;">پریمیوم‌ترین فضای مطالعه و کتابخانه دیجیتال کشور</p>
+        <div class="gateway-box">
+            <span>🛡️ درگاه امن فعال:</span>
+            <a href="https://reymit.ir/sobhanstbs">Reymit.ir/sobhanstbs</a>
+        </div>
     </div>
 </header>
 
-<div class="container">
-    
+<main class="container">
+
     <!-- بخش نشستن کناران -->
-    <h2 class="section-title">اشتراک نشستن کناران</h2>
-    <div class="pricing-grid">
-        <div class="card">
-            <h3>روزانه</h3>
-            <div class="price">۱۰,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>تحویل فوری صندلی</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
+    <section>
+        <h2 class="section-title">اشتراک نشستن کناران</h2>
+        <div class="pricing-grid">
+            
+            <div class="glow-card">
+                <h3>روزانه</h3>
+                <div class="card-price">۱۰,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8; margin-bottom: 30px;">یک روز کامل مطالعه متمرکز</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">خرید فوری</a>
+            </div>
+
+            <div class="glow-card" style="border-color: var(--secondary);">
+                <div style="position: absolute; top: 10px; right: 10px; background: var(--secondary); padding: 5px 15px; border-radius: 10px; font-size: 0.8rem;">پرطرفدار</div>
+                <h3>هفتگی</h3>
+                <div class="card-price">۵۰,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8; margin-bottom: 30px;">۷ روز رزرو صندلی ثابت</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">خرید فوری</a>
+            </div>
+
+            <div class="glow-card">
+                <h3>ماهانه</h3>
+                <div class="card-price">۱۸۰,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8; margin-bottom: 30px;">۳۰ روز دسترسی VIP</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">خرید فوری</a>
+            </div>
+
+            <div class="glow-card">
+                <h3>آخر ترم</h3>
+                <div class="card-price">۴۹۰,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8; margin-bottom: 30px;">کل فصل امتحانات با خیالی آسوده</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">خرید فوری</a>
+            </div>
+
         </div>
-        <div class="card">
-            <h3>هفتگی</h3>
-            <div class="price">۵۰,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>رزرو ۷ روزه</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
-        </div>
-        <div class="card">
-            <h3>ماهانه</h3>
-            <div class="price :">۱۸۰,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>اشتراک ۳۰ روزه</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
-        </div>
-        <div class="card">
-            <h3>تا آخر ترم</h3>
-            <div class="price">۴۹۰,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>دسترسی نامحدود ترم</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
-        </div>
-    </div>
+    </section>
 
     <!-- بخش کتاب باربد -->
-    <h2 class="section-title">اشتراک کتاب باربد</h2>
-    <div class="pricing-grid">
-        <div class="card">
-            <h3>روزانه</h3>
-            <div class="price">۳,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>دسترسی ۲۴ ساعته</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
-        </div>
-        <div class="card">
-            <h3>هفتگی</h3>
-            <div class="price">۱۸,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>دسترسی ۷ روزه</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
-        </div>
-        <div class="card">
-            <h3>ماهانه</h3>
-            <div class="price">۶۰,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>دسترسی ماهانه</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
-        </div>
-        <div class="card">
-            <h3>تا آخر ترم</h3>
-            <div class="price">۱۷۰,۰۰۰ <span>تومان</span></div>
-            <ul class="features"><li>دسترسی کل ترم</li></ul>
-            <a href="https://reymit.ir/sobhanstbs" class="btn-buy">خرید آنلاین</a>
-        </div>
-    </div>
+    <section>
+        <h2 class="section-title">اشتراک کتاب باربد</h2>
+        <div class="pricing-grid">
+            
+            <div class="glow-card">
+                <h3>روزانه</h3>
+                <div class="card-price">۳,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8;">دسترسی به تمام منابع</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">پرداخت سریع</a>
+            </div>
 
-</div>
+            <div class="glow-card">
+                <h3>هفتگی</h3>
+                <div class="card-price">۱۸,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8;">امانت کتاب و جزوه</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">پرداخت سریع</a>
+            </div>
+
+            <div class="glow-card">
+                <h3>ماهانه</h3>
+                <div class="card-price">۶۰,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8;">آرشیو نامحدود دیجیتال</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">پرداخت سریع</a>
+            </div>
+
+            <div class="glow-card">
+                <h3>تا آخر ترم</h3>
+                <div class="card-price">۱۷۰,۰۰۰ <span>تومان</span></div>
+                <p style="color: #94a3b8;">پکیج کامل منابع درسی</p>
+                <a href="https://reymit.ir/sobhanstbs" class="btn-glow">پرداخت سریع</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- راهنمای گام به گام -->
+    <section class="guide-section">
+        <h2 style="color: #fff; margin-bottom: 40px;">راهنمای گام‌به‌گام فعالسازی</h2>
+        
+        <div class="step-item">
+            <div class="step-num">۱</div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.3rem;">انتخاب پلن</h4>
+                <p style="color: #94a3b8; margin: 5px 0 0;">پلن مورد نظر خود را از لیست بالا انتخاب کرده و روی دکمه خرید کلیک کنید.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">۲</div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.3rem;">پرداخت در درگاه ریمیت</h4>
+                <p style="color: #94a3b8; margin: 5px 0 0;">مبلغ مربوطه را در درگاه رسمی سبحان علوی (باربد) با امنیت کامل پرداخت نمایید.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">۳</div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.3rem;">دریافت رسید</h4>
+                <p style="color: #94a3b8; margin: 5px 0 0;">شناسه تراکنش یا رسید تصویری را نزد خود نگه دارید.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">۴</div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.3rem;">ارسال به پشتیبانی</h4>
+                <p style="color: #94a3b8; margin: 5px 0 0;">اطلاعات خود را در فرم زیر وارد کنید تا اشتراک شما در روبیکا فعال شود.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فرم تماس و پشتیبانی روبیکا -->
+    <section class="contact-card" id="contact">
+        <h2 style="text-align: center; margin-bottom: 40px; font-size: 2rem;">ارسال پیام به پشتیبانی روبیکا</h2>
+        <p style="text-align: center; color: #94a3b8; margin-bottom: 40px;">جهت فعالسازی اشتراک یا پرسش سوال، فرم زیر را پر کرده و دکمه ارسال را بزنید.</p>
+        
+        <form id="rubikaForm">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <input type="text" id="name" class="form-input" placeholder="نام و نام خانوادگی شما" required>
+                <input type="tel" id="phone" class="form-input" placeholder="شماره تماس (مثلا: ۰۹۱۲)" required>
+            </div>
+            <textarea id="message" class="form-input" rows="5" placeholder="کدام اشتراک را تهیه کرده‌اید؟ یا چه سوالی دارید؟" required></textarea>
+            
+            <button type="button" onclick="redirectToRubika()" class="btn-glow" style="border: none;">
+                تایید و انتقال به روبیکا (@callofgoodp)
+            </button>
+        </form>
+    </section>
+
+    <!-- بخش قوانین تکمیلی برای طولانی شدن سطرها -->
+    <section style="margin-top: 80px; font-size: 0.9rem; color: #475569; border-top: 1px solid #1e293b; padding-top: 40px;">
+        <h4 style="color: #94a3b8;">قوانین و ضوابط باربد:</h4>
+        <p>۱. تمامی اشتراک‌ها بلافاصله پس از تایید توسط ادمین در روبیکا فعال می‌شوند.</p>
+        <p>۲. بازگشت وجه تنها در صورت بروز مشکلات فنی از سمت مجموعه امکان‌پذیر است.</p>
+        <p>۳. صندلی‌های رزرو شده در پلن‌های هفتگی و بالاتر به صورت ثابت برای کاربر رزرو می‌مانند.</p>
+        <p>۴. هرگونه سوء استفاده از منابع دیجیتال کتابخانه منجر به مسدود سازی اشتراک می‌گردد.</p>
+        <p>۵. ساعت کاری مجموعه جهت استفاده حضوری از ساعت ۸ صبح الی ۲۲ شب می‌باشد.</p>
+    </section>
+
+</main>
 
 <footer>
-    <p>تمامی پرداخت‌ها از طریق درگاه امن ریمیت انجام می‌شود.</p>
+    <div class="footer-logo">BARBOD PREMIUM</div>
+    <p style="color: #64748b;">طراحی شده با درخشش نئونی برای دانش‌پژوهان برتر</p>
+    <div style="margin-top: 30px; display: flex; justify-content: center; gap: 20px;">
+        <a href="#" style="color: #475569; text-decoration: none;">تلگرام</a>
+        <a href="https://rubika.ir/callofgoodp" style="color: #475569; text-decoration: none;">روبیکا</a>
+        <a href="#" style="color: #475569; text-decoration: none;">اینستاگرام</a>
+    </div>
+    <p style="margin-top: 40px; font-size: 0.8rem; color: #334155;">تمامی حقوق مادی و معنوی محفوظ است ۱۴۰۴ ©</p>
 </footer>
 
+<script>
+    /**
+     * تابع مدیریت ارسال فرم به روبیکا
+     */
+    function redirectToRubika() {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const message = document.getElementById('message').value;
+
+        if(!name || !phone || !message) {
+            alert('لطفاً تمام فیلدها را با دقت پر کنید.');
+            return;
+        }
+
+        // نمایش لودینگ فرضی برای زیبایی
+        alert('اطلاعات شما ثبت شد. در حال انتقال به آیدی پشتیبان در روبیکا...');
+
+        // انتقال به صفحه روبیکا
+        window.location.href = "https://rubika.ir/callofgoodp";
+    }
+
+    // لاگ‌های سیستمی جهت مانیتورینگ
+    console.log("Barbod Neon Theme Loaded...");
+    console.log("Status: Optimized for Visual Effects");
+    console.log("Support Target: callofgoodp");
+</script>
 </body>
 </html>
